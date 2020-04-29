@@ -27,9 +27,15 @@ def get_bb_slot(url):
             if "checkout" in driver.current_url and not "Unfortunately, we do not have" in src:
                 print("Found the slots!")
                 for i in range(60):
-                     notify("Slots Available!", "Please go and choose the slots!")
-                     time.sleep(20)
+                    notify("Slots Available!", "Please go and choose the slots!")
+                    time.sleep(20)
         except Exception  as e:
+            src=driver.page_source
+            if "Item Available" in src:
+                notify("Item Unavailable message, slots might be available")
+            else: 
+                notify("Error Occurred, slots might be available")
+            time.sleep(20)
             print("If this message pops up multiple times, please find the error and create a PR!")
             print (e)
             pass
